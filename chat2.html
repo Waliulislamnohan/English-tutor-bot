@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Interface</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex h-screen bg-gray-100 text-gray-800">
+
+    <!-- Sidebar -->
+    <div class="hidden md:block shadow-lg w-64 p-4 border-r flex flex-col" style="
+    background: hsla(246, 85%, 66%, 1);
+    background: linear-gradient(90deg, hsla(246, 85%, 66%, 1) 0%, hsla(290, 56%, 56%, 1) 100%);
+    background: -moz-linear-gradient(90deg, hsla(246, 85%, 66%, 1) 0%, hsla(290, 56%, 56%, 1) 100%);
+    background: -webkit-linear-gradient(90deg, hsla(246, 85%, 66%, 1) 0%, hsla(290, 56%, 56%, 1) 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#7061F2', endColorstr='#B84FCE', GradientType=1 );
+">
+        <h2 class="text-2xl font-bold mb-4 text-white">EnglishMate</h2>
+
+        <ul class="flex-1 space-y-4">
+            <li class="cursor-pointer bg-white hover:bg-white p-2 rounded-md shadow-lg">Recent topics</li>
+            <li class="cursor-pointer hover:bg-white p-2 rounded-md">Grammar basics</li>
+            <li class="cursor-pointer hover:bg-white p-2 rounded-md">Vocabulary lessons</li>
+            <li class="cursor-pointer hover:bg-white p-2 rounded-md">Pronunciation practice</li>
+            <li class="cursor-pointer hover:bg-white p-2 rounded-md">Listening exercises</li>
+            <li class="cursor-pointer hover:bg-white p-2 rounded-md">Reading</li>
+            <li class="cursor-pointer hover:bg-gray-300 p-2 rounded-md">Writing assignments</li>
+            <li class="cursor-pointer hover:bg-gray-300 p-2 rounded-md">Speaking assessments</li>
+            <li class="cursor-pointer hover:bg-gray-300 p-2 rounded-md">Quiz time</li>
+            <li class="cursor-pointer hover:bg-gray-300 p-2 rounded-md">Group discussions</li>
+            <li class="cursor-pointer hover:bg-gray-300 p-2 rounded-md">Vocabulary club</li>
+        </ul>
+    </div>
+
+    <!-- Chat Area -->
+    <div class="flex-1 flex flex-col shadow-lg">
+        <!-- Chat Header -->
+        <div class="bg-purple-700 p-4 text-white flex items-center shadow-lg">
+            <input type="text" placeholder="Type your English query here" class="w-full p-2 rounded-full border-none outline-none text-gray-700">
+        </div>
+
+        <!-- Chat History -->
+        <div id="chat-history" class="flex-1 p-4 overflow-y-auto bg-white space-y-4">
+            <div class="flex items-start">
+                <img src="https://i.ibb.co/frrrVpd/tutor.png" alt="User" class="w-10 h-10 rounded-full mr-4">
+                <div class="bg-gray-200 p-4 rounded-lg max-w-md">
+                    <p>Let's practice English together.</p>
+                </div>
+            </div>
+            <div class="flex items-start">
+                <img src="https://i.ibb.co/frrrVpd/tutor.png" alt="User" class="w-10 h-10 rounded-full mr-4">
+                <div class="bg-gray-200 p-4 rounded-lg max-w-md">
+                    <p>I'm here to help with your English assignments.</p>
+                </div>
+            </div>
+            <!-- More messages can be added dynamically -->
+        </div>
+
+        <!-- Chat Input -->
+        <div class="p-4 bg-gray-100 border-t flex items-center">
+            <input id="message-input" type="text" placeholder="Type a new message..." class="flex-1 p-2 border border-gray-300 rounded-full outline-none">
+            <button id="send-btn" class="ml-4 px-6 py-2 bg-purple-700 text-white rounded-full">Send</button>
+        </div>
+    </div>
+
+    <!-- Right Panel -->
+    <a href="./user2.html" class="block">
+        <div class="hidden md:block w-64 p-4 border-l bg-gray-200 shadow-lg">
+            <div class="text-center">
+                <img src="https://i.ibb.co/frrrVpd/tutor.png" alt="Chatbot" class="w-24 h-24 rounded-full mx-auto mb-4">
+                <h3 class="text-xl font-semibold">EnglishMate AI Chatbot</h3>
+                <p class="text-gray-600">Active now</p>
+            </div>
+            <div class="mt-6 text-sm text-gray-700">
+                <p><strong>Position:</strong> English Language Tutor</p>
+                <p><strong>Email:</strong> contact@englishmate.co</p>
+                <p><strong>Local time:</strong> 11:58 AM</p>
+            </div>
+        </div>
+    </a>
+    
+
+    <script>
+        // JavaScript for interactivity
+        document.getElementById('send-btn').addEventListener('click', function() {
+            const messageInput = document.getElementById('message-input');
+            const messageText = messageInput.value.trim();
+
+            if (messageText !== "") {
+                const messageDiv = document.createElement('div');
+                messageDiv.classList.add('flex', 'items-start', 'mt-4');
+                
+                messageDiv.innerHTML = `
+                    <img src="user.jpg" alt="User" class="w-10 h-10 rounded-full mr-4">
+                    <div class="bg-purple-100 p-4 rounded-lg max-w-md">
+                        <p>${messageText}</p>
+                    </div>
+                `;
+
+                document.getElementById('chat-history').appendChild(messageDiv);
+                messageInput.value = ""; // Clear the input field
+                messageInput.focus(); // Focus back to the input
+            }
+        });
+
+        // Pressing Enter to send message
+        document.getElementById('message-input').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                document.getElementById('send-btn').click();
+            }
+        });
+    </script>
+</body>
+</html>
